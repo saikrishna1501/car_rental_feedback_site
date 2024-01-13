@@ -8,8 +8,10 @@ def review_view(request):
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
+            form.save()
             return redirect(reverse('cars:thank_you'))
+        else:
+            return render(request, "cars/review_page.html", {"form": form}) 
             
     else:
         form = ReviewForm()
